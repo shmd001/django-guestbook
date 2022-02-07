@@ -9,4 +9,4 @@ class GuestbookView(ListView):
 
     model = Message
     template_name = "base/guestbook.html"
-    context_object_name = "message"
+    context_object_name = "messages"
