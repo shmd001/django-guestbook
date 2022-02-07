@@ -1,8 +1,8 @@
 """BaseApp URL Configuration"""
 
 from django.urls import path
-from .views import index
+from .views import GuestbookView
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", GuestbookView.as_view(), name="guestbook"),
 ]
