@@ -1,3 +1,9 @@
-from django.shortcuts import render
+"""BaseApp views"""
 
-# Create your views here.
+from django.http import HttpResponse
+
+
+def index(request):
+    """Test"""
+
+    return HttpResponse("Hello 👋🏻")
