@@ -1,8 +1,7 @@
 """BaseApp views"""
 
-from django.http import HttpResponseRedirect
 from django.views.generic import ListView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from .models import Message
 from .forms import SigninForm
@@ -23,3 +22,7 @@ class UserSignin(LoginView):
     form_class = SigninForm
     redirect_authenticated_user = True
     next_page = reverse_lazy("guestbook")
+
+
+class UserSignout(LogoutView):
+    next_page = reverse_lazy("signin")
