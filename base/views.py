@@ -1,9 +1,12 @@
 """BaseApp views"""
 
-from django.http import HttpResponse
+from django.views.generic import ListView
+from .models import Message
 
 
-def index(request):
-    """Test"""
+class GuestbookView(ListView):
+    """Guestbook main view"""
 
-    return HttpResponse("Hello 👋🏻")
+    model = Message
+    template_name = "base/guestbook.html"
+    context_object_name = "message"
