@@ -44,25 +44,19 @@
                     
                     <!-- SIGN UP -->
                     <form>
-                        <div class="form-floating mb-3">
-                            <input type="login" class="form-control rounded-4" id="floatingInput" placeholder="Username">
-                            <label for="floatingInput">Username</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign in</button>
+                        {% if request.user.is_authenticated %}
+                            <p>Hello, {{user.username}} 👋🏻</p>
+                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign out</button>
+                        {% else %}
+                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign in</button>
+                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Register</button>
+                        {% endif %}
                     </form>
 
                     <hr class="my-4">
 
                     <!-- SEND MESSAGE -->
                     <form>
-                        <div class="form-floating mb-3">
-                            <input type="login" class="form-control rounded-4" id="floatingInput" placeholder="Username">
-                            <label for="floatingInput">Username</label>
-                        </div>
                         <div class="form-floating mb-3">
                             <textarea class="form-control" placeholder="Message text" id="floatingTextarea"></textarea>
                             <label for="floatingTextarea">Message</label>
@@ -79,7 +73,7 @@
 <footer>
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <p class="col-md-4 mb-0 text-muted">© 2022 Shmd001</p>
+            <p class="col-md-4 mb-0 text-muted">© 2022 shmd001</p>
     
             <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 {% load static %}
