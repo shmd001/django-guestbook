@@ -43,15 +43,15 @@
                 <div class="modal-body p-5 pt-0">
                     
                     <!-- SIGN UP -->
-                    <form>
+                    <div>
                         {% if request.user.is_authenticated %}
                             <p>Hello, {{user.username}} 👋🏻</p>
-                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign out</button>
+                            <a href="{% url 'signout' %}" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">Sign out</a>
                         {% else %}
-                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign in</button>
-                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Register</button>
+                            <a href="{% url 'signin' %}" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">Sign in</a>
+                            <a href="{% url 'signup' %}" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">Register</a>
                         {% endif %}
-                    </form>
+                    </div>
 
                     <hr class="my-4">
 
