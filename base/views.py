@@ -3,7 +3,7 @@
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from .models import Message
@@ -35,6 +35,14 @@ class EditMessage(UpdateView):
     template_name = "base/edit_message.html"
     success_url = reverse_lazy("guestbook")
     fields = ["text"]
+
+
+class DeleteMessage(DeleteView):
+    """Message delete view"""
+
+    model = Message
+    template_name = "base/delete_message.html"
+    success_url = reverse_lazy("guestbook")
 
 
 class UserSignin(LoginView):

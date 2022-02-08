@@ -26,7 +26,8 @@ textarea {
   min-height: 200px !important;
 }
 
-a.edit {
+a.edit-link, a.delete-link {
   float: right;
   text-decoration: none;
+  margin-left: 10px;
 }

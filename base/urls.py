@@ -1,7 +1,14 @@
 """BaseApp URL Configuration"""
 
 from django.urls import path
-from .views import GuestbookView, UserSignin, UserSignout, UserSignup, EditMessage
+from .views import (
+    GuestbookView,
+    UserSignin,
+    UserSignout,
+    UserSignup,
+    EditMessage,
+    DeleteMessage,
+)
 
 urlpatterns = [
     path("", GuestbookView.as_view(), name="guestbook"),
@@ -9,4 +16,5 @@ urlpatterns = [
     path("signout/", UserSignout.as_view(), name="signout"),
     path("signup/", UserSignup.as_view(), name="signup"),
     path("editmessage/<int:pk>/", EditMessage.as_view(), name="message-edit"),
+    path("deletemessage/<int:pk>/", DeleteMessage.as_view(), name="message-delete"),
 ]
