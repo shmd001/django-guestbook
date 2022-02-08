@@ -3,6 +3,30 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
+from base.models import Message
+
+
+class SendMessageForm(forms.ModelForm):
+    """Send messge form"""
+
+    text = forms.CharField(
+        max_length=255,
+        min_length=1,
+        label="Message",
+        label_suffix="",
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "id": "floatingTextarea",
+            }
+        ),
+    )
+
+    class Meta:
+        """Meta class for ModelForm"""
+
+        model = Message
+        fields = ["text"]
 
 
 class SigninForm(AuthenticationForm):
