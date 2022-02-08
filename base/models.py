@@ -11,3 +11,8 @@ class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     # May be IP?
+
+    class Meta:
+        """Meta class for ordering messages from new to old"""
+
+        ordering = ["-created_at"]
