@@ -7,15 +7,25 @@ from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from .models import Message
-from .forms import SigninForm, SignupForm
+from .forms import SigninForm, SignupForm, SendMessageForm
 
 
-class GuestbookView(ListView):
+class GuestbookView(ListView, FormView):
     """Guestbook main view"""
 
     model = Message
+    form_class = SendMessageForm
+    success_url = reverse_lazy("guestbook")
     template_name = "base/guestbook.html"
     context_object_name = "messages"
+
+    def form_valid(self, form):
+
+        message = form.save(commit=False)
+        message.user = self.request.user
+        message.save()
+
+        return super().form_valid(form)
 
 
 class UserSignin(LoginView):
