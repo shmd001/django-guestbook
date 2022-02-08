@@ -1,0 +1,16 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<div class="card">
+    <h5 class="card-header">Edit message</h5>
+    <div class="card-body">
+      <form method="POST" class="form-control">
+          {% csrf_token %}
+          {{form.as_p}}
+          <button class="btn btn-primary">Edit</button>
+      </form>
+    </div>
+</div>
+
+{% endblock content %}

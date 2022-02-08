@@ -25,3 +25,8 @@ main {
 textarea {
   min-height: 200px !important;
 }
+
+a.edit {
+  float: right;
+  text-decoration: none;
+}

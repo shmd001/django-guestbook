@@ -29,6 +29,7 @@
                     <div class="card">
                         <div class="card-header">
                             {{message.user}}
+                            <a class="edit" href="{% url 'message-edit' message.id %}">✏️</a>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{message.text}}</h5>
