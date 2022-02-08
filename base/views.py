@@ -6,11 +6,12 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Message
 from .forms import SigninForm, SignupForm, SendMessageForm
 
 
-class GuestbookView(ListView, FormView):
+class GuestbookView(LoginRequiredMixin, ListView, FormView):
     """Guestbook main view"""
 
     model = Message
@@ -28,7 +29,7 @@ class GuestbookView(ListView, FormView):
         return super().form_valid(form)
 
 
-class EditMessage(UpdateView):
+class EditMessage(LoginRequiredMixin, UpdateView):
     """Message edit view"""
 
     model = Message
@@ -36,13 +37,29 @@ class EditMessage(UpdateView):
     success_url = reverse_lazy("guestbook")
     fields = ["text"]
 
+    def get(self, request, *args, **kwargs):
 
-class DeleteMessage(DeleteView):
+        # Check if the message belongs to user
+        if request.user != Message.objects.get(id=kwargs["pk"]).user:
+            return HttpResponseRedirect(reverse_lazy("guestbook"))
+
+        return super().get(request, *args, **kwargs)
+
+
+class DeleteMessage(LoginRequiredMixin, DeleteView):
     """Message delete view"""
 
     model = Message
     template_name = "base/delete_message.html"
     success_url = reverse_lazy("guestbook")
+
+    def get(self, request, *args, **kwargs):
+
+        # Check if the message belongs to user
+        if request.user != Message.objects.get(id=kwargs["pk"]).user:
+            return HttpResponseRedirect(reverse_lazy("guestbook"))
+
+        return super().get(request, *args, **kwargs)
 
 
 class UserSignin(LoginView):

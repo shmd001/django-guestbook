@@ -29,8 +29,10 @@
                     <div class="card">
                         <div class="card-header">
                             {{message.user}}
-                            <a class="delete-link" href="{% url 'message-delete' message.id %}">❌</a>
-                            <a class="edit-link" href="{% url 'message-edit' message.id %}">✏️</a>
+                            {% if request.user == message.user %}
+                                <a class="delete-link" href="{% url 'message-delete' message.id %}">❌</a>
+                                <a class="edit-link" href="{% url 'message-edit' message.id %}">✏️</a>
+                            {% endif %}
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{message.text}}</h5>
@@ -46,13 +48,8 @@
                     
                     <!-- SIGN UP -->
                     <div>
-                        {% if request.user.is_authenticated %}
-                            <p>Hello, {{user.username}} 👋🏻</p>
-                            <a href="{% url 'signout' %}" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">Sign out</a>
-                        {% else %}
-                            <a href="{% url 'signin' %}" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">Sign in</a>
-                            <a href="{% url 'signup' %}" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">Register</a>
-                        {% endif %}
+                        <p>Hello, {{user.username}} 👋🏻</p>
+                        <a href="{% url 'signout' %}" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">Sign out</a>
                     </div>
 
                     <hr class="my-4">
